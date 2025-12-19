@@ -105,31 +105,32 @@ https://adaptivelearningngo-ctc-thesemicolon.streamlit.app/
 
 ## 🔮 Future Scope
 
-Real-time chat and video calling (WebRTC integration)
-AI-powered doubt resolution
-Persistent database integration
-Mentor analytics and performance tracking
-WhatsApp/SMS reminders for learning sessions
-Support for vocational and skill-based learning
+* Real-time chat and video calling (WebRTC integration)
+* AI-powered doubt resolution
+* Persistent database integration
+* Mentor analytics and performance tracking
+* WhatsApp/SMS reminders for learning sessions
+* Support for vocational and skill-based learning
 
 ## 👥 Team Details
 
-Team Name: The Semicolon
-Project Name: Sahay – Peer Learning Matching System
+* Team Name: The Semicolon
+* Project Name: Sahay – Peer Learning Matching System
 
 👩‍💻 Team Leader
-Srushti Kalokhe
+* Srushti Kalokhe
 
 👩‍💻 Team Members
-Srushti Kalokhe
-Swarali Warade
-Nikita Sharma
-Tanieeshka Sonawane
-Anushka Dhane
+* Srushti Kalokhe
+* Swarali Warade
+* Nikita Sharma
+* Tanieeshka Sonawane
+* Anushka Dhane
 
 ## 🏆 Hackathon Note
 This project is a functional prototype developed during a hackathon.
 The focus is on demonstrating logic, user flow, and scalability, with advanced features planned for future development.
+
 
 
 
