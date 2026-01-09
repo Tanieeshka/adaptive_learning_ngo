@@ -1,35 +1,33 @@
-import streamlit as st
-from ratings import show_rating_ui
-from matching import find_matches
 import time
+import streamlit as st
 
 # =========================================================
 # PAGE CONFIG
 # =========================================================
 st.set_page_config(
     page_title="Peer Learning Matchmaking System",
-    page_icon="🎓",
     layout="wide"
 )
 
 # =========================================================
-# CUSTOM THEME + ANIMATIONS (SAFE CSS)
+# CUSTOM THEME + ANIMATIONS
 # =========================================================
 st.markdown("""
 <style>
 .stApp {
     background: linear-gradient(135deg, #e8f5ff, #e8fff3);
+    color: black;
 }
 
 /* Headings */
-h1, h2, h3 {
-    color: #0b5394;
+h1, h2, h3, h4, h5, h6, p, label, span, div {
+    color: black !important;
 }
 
 /* Buttons */
 .stButton>button {
     background: linear-gradient(90deg, #1abc9c, #3498db);
-    color: white;
+    color: white !important;
     border-radius: 10px;
     padding: 0.6em 1.2em;
     border: none;
@@ -63,6 +61,7 @@ h1, h2, h3 {
     background: #f4fbff;
     padding: 12px;
     border-radius: 12px;
+    color: black;
 }
 </style>
 """, unsafe_allow_html=True)
@@ -94,11 +93,11 @@ if "rating" not in st.session_state:
 SUBJECTS = ["Mathematics", "English", "Science"]
 
 # =========================================================
-# HELPER FUNCTIONS (UNCHANGED)
+# HELPER FUNCTIONS
 # =========================================================
 def show_rating_ui():
     st.session_state.rating = st.slider(
-        "⭐ Rate your mentor",
+        "Rate your mentor",
         min_value=0,
         max_value=5,
         value=0,
@@ -149,8 +148,8 @@ def find_best_mentor(mentee, mentors):
 # =========================================================
 st.markdown("""
 <div class="card">
-    <h1>🎓 Peer Learning Matchmaking System</h1>
-    <p>🤝 Connecting students to learn, grow, and succeed together</p>
+    <h1>Peer Learning Matchmaking System</h1>
+    <p>Connecting students to learn, grow, and succeed together</p>
 </div>
 """, unsafe_allow_html=True)
 
@@ -160,33 +159,33 @@ st.markdown("""
 if st.session_state.stage == 1:
     st.markdown("""
     <div class="card">
-        <h2>🧑‍🎓 Step 1: Create Your Profile</h2>
-        <p>Tell us about your strengths and learning needs 📘</p>
+        <h2>Step 1: Create Your Profile</h2>
+        <p>Tell us about your strengths and learning needs</p>
     </div>
     """, unsafe_allow_html=True)
 
-    role = st.radio("👤 Role", ["Student", "Teacher"])
-    name = st.text_input("✍️ Full Name")
+    role = st.radio("Role", ["Student", "Teacher"])
+    name = st.text_input("Full Name")
 
-    grade = st.selectbox("🏫 Grade", [f"Grade {i}" for i in range(1, 11)])
-    time_slot = st.selectbox("⏰ Time Slot", ["4-5 PM", "5-6 PM", "6-7 PM"])
+    grade = st.selectbox("Grade", [f"Grade {i}" for i in range(1, 11)])
+    time_slot = st.selectbox("Time Slot", ["4-5 PM", "5-6 PM", "6-7 PM"])
 
     strong_subjects, weak_subjects, teaches = [], [], []
 
     if role == "Student":
-        st.subheader("📚 Subjects")
+        st.subheader("Subjects")
         col1, col2 = st.columns(2)
         with col1:
-            strong_subjects = st.multiselect("💪 Strong Subjects", SUBJECTS)
+            strong_subjects = st.multiselect("Strong Subjects", SUBJECTS)
         with col2:
-            weak_subjects = st.multiselect("🧩 Weak Subjects", SUBJECTS)
+            weak_subjects = st.multiselect("Weak Subjects", SUBJECTS)
     else:
-        teaches = st.multiselect("📘 Subjects You Teach", SUBJECTS)
+        teaches = st.multiselect("Subjects You Teach", SUBJECTS)
 
     if role == "Student" and set(strong_subjects) & set(weak_subjects):
-        st.warning("⚠️ A subject cannot be both strong and weak")
+        st.warning("A subject cannot be both strong and weak")
 
-    if st.button("🚀 Submit Profile & Find Match", type="primary"):
+    if st.button("Submit Profile & Find Match", type="primary"):
         if not name.strip():
             st.error("Please enter your name")
         else:
@@ -218,8 +217,8 @@ if st.session_state.stage == 1:
 if st.session_state.stage == 2:
     st.markdown("""
     <div class="card">
-        <h2>🔍 Step 2: Match Results</h2>
-        <p>Finding the best mentor for you 🧠</p>
+        <h2>Step 2: Match Results</h2>
+        <p>Finding the best mentor for you</p>
     </div>
     """, unsafe_allow_html=True)
 
@@ -231,17 +230,17 @@ if st.session_state.stage == 2:
         )
 
     if best_mentor:
-        st.success(f"🎉 Match Found! Score: {score}")
+        st.success(f"Match Found. Score: {score}")
 
         col1, col2 = st.columns(2)
         with col1:
-            st.metric("🧑‍🏫 Mentor", best_mentor["name"])
+            st.metric("Mentor", best_mentor["name"])
         with col2:
-            st.metric("📊 Compatibility", score)
+            st.metric("Compatibility", score)
 
-        st.info("📌 Reasons: " + ", ".join(reasons))
+        st.info("Reasons: " + ", ".join(reasons))
 
-        if st.button("▶️ Start Learning Session", type="primary"):
+        if st.button("Start Learning Session", type="primary"):
             st.session_state.current_match = {
                 "Mentor": best_mentor["name"],
                 "Mentee": st.session_state.profile["name"],
@@ -252,7 +251,7 @@ if st.session_state.stage == 2:
             st.rerun()
     else:
         st.warning("No suitable match found")
-        if st.button("🔙 Back"):
+        if st.button("Back"):
             st.session_state.stage = 1
             st.rerun()
 
@@ -262,29 +261,29 @@ if st.session_state.stage == 2:
 if st.session_state.stage == 3:
     st.markdown("""
     <div class="card">
-        <h2>🧑‍🏫 Learning Session</h2>
-        <p>Ask questions, share resources, and learn together 🚀</p>
+        <h2>Learning Session</h2>
+        <p>Ask questions, share resources, and collaborate</p>
     </div>
     """, unsafe_allow_html=True)
 
-    message = st.text_area("💬 Your Message")
-    if st.button("📨 Send Message"):
-        st.success("Message sent!")
+    message = st.text_area("Your Message")
+    if st.button("Send Message"):
+        st.success("Message sent")
 
-    files = st.file_uploader("📎 Upload Resources", accept_multiple_files=True)
+    files = st.file_uploader("Upload Resources", accept_multiple_files=True)
     if files:
         for f in files:
             st.success(f"Uploaded: {f.name}")
 
     col1, col2, col3 = st.columns(3)
     with col1:
-        if st.button("🤖 AI Help"):
-            st.info("Break problems into steps 🧩")
+        if st.button("AI Assistance"):
+            st.info("Break problems into smaller steps")
     with col2:
-        if st.button("📊 Share Progress"):
-            st.success("Progress shared 🎯")
+        if st.button("Share Progress"):
+            st.success("Progress shared")
     with col3:
-        if st.button("❌ End Session"):
+        if st.button("End Session"):
             st.session_state.stage = 4
             st.rerun()
 
@@ -294,26 +293,26 @@ if st.session_state.stage == 3:
 if st.session_state.stage == 4:
     st.markdown("""
     <div class="card">
-        <h2>⭐ Rate the Session</h2>
-        <p>Your feedback improves learning quality 🌱</p>
+        <h2>Rate the Session</h2>
+        <p>Your feedback helps improve learning quality</p>
     </div>
     """, unsafe_allow_html=True)
 
     show_rating_ui()
 
-    if st.button("✅ Submit Rating"):
+    if st.button("Submit Rating"):
         mentor = st.session_state.current_match["Mentor"]
         st.session_state.leaderboard[mentor] = (
             st.session_state.leaderboard.get(mentor, 0) + st.session_state.rating * 20
         )
-        st.success("Thank you for your feedback 🙌")
+        st.success("Thank you for your feedback")
 
-    st.subheader("🏆 Leaderboard")
+    st.subheader("Leaderboard")
     for i, (name, score) in enumerate(
         sorted(st.session_state.leaderboard.items(), key=lambda x: x[1], reverse=True), 1
     ):
-        st.write(f"{i}. {name} — {score} pts")
+        st.write(f"{i}. {name} - {score} points")
 
-    if st.button("🔁 New Session"):
+    if st.button("New Session"):
         st.session_state.clear()
         st.rerun()
