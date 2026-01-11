@@ -1,15 +1,28 @@
 import streamlit as st
 
-def show_rating_ui():
-    st.header("Rate Your Session")
+# Page configuration
+st.set_page_config(page_title="Peer Learning Matchmaking System", layout="centered")
+
+st.title("Peer Learning Matchmaking System")
+st.subheader("Rate Session")
+
+# Mentor name (can be dynamic)
+mentor_name = "Mentor: Rahul Sharma"
+st.write(mentor_name)
+
+st.write("### Please rate your mentor")
+
+# Star rating options
+rating = st.radio(
+    label="Rating",
+    options=[1, 2, 3, 4, 5],
+    format_func=lambda x: "⭐" * x,
+    horizontal=True
+)
+
+# Submit button
+if st.button("Submit Rating"):
+    # Backend logic placeholder
+    # Example: save_rating(mentor_id, rating)
     
-    if "rating" not in st.session_state:
-        st.session_state.rating = 0
-        
-    cols = st.columns(5)
-    for i in range(5):
-        star = "⭐" if i < st.session_state.rating else "☆"
-        if cols[i].button(star, key=f"star_{i}"):
-            st.session_state.rating = i + 1
-            
-    st.write(f"Rating: {st.session_state.rating}/5")
+    st.success(f"Thank you! You rated this mentor {rating} ⭐")
