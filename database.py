@@ -8,6 +8,7 @@ def init_db():
     cursor.execute("""
     CREATE TABLE IF NOT EXISTS users (
         name TEXT PRIMARY KEY,
+        password TEXT,
         role TEXT,
         grade TEXT,
         class INTEGER,
