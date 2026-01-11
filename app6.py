@@ -248,7 +248,6 @@ elif page == "Practice":
 # Admin
 # =========================
 elif page == "Admin":
-    elif page == "Admin":
     admin_key = st.sidebar.text_input(
         "Admin Access Key",
         type="password"
