@@ -6,6 +6,8 @@ from materials import materials_page
 from practice import practice_page
 from ratings import show_rating_ui
 from matching import find_matches
+from admin import admin_page
+
 
 
 # ---- DATABASE ----
@@ -30,8 +32,9 @@ st.set_page_config(
 st.sidebar.title("Navigation")
 page = st.sidebar.radio(
     "Go to",
-    ["Matchmaking", "Learning Materials", "Practice"]
+    ["Matchmaking", "Learning Materials", "Practice", "Admin"]
 )
+
 
 # =========================================================
 # SESSION STATE INIT
@@ -241,3 +244,19 @@ elif page == "Practice":
         st.warning("Create a profile first.")
     else:
         practice_page()
+# =========================
+# Admin
+# =========================
+elif page == "Admin":
+    elif page == "Admin":
+    admin_key = st.sidebar.text_input(
+        "Admin Access Key",
+        type="password"
+    )
+
+    if admin_key != "ngo-admin-123":
+        st.warning("Unauthorized access")
+    else:
+        admin_page()
+
+
