@@ -4,6 +4,8 @@ import time
 # ---- IMPORT PAGES ----
 from materials import materials_page
 from practice import practice_page
+from ratings import show_rating_ui
+from matching import find_matches
 
 # =========================================================
 # PAGE CONFIG
